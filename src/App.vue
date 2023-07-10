@@ -2,8 +2,8 @@
    <navbar 
         :pages="pages"
         :active-page="activePage"
-        :nav-link-click="(index) => activePage = index"
-     ></navbar>
+        ></navbar>
+        <!-- :nav-link-click="(index) => activePage = index" -->
 
      <!-- calling our component and passing page-title and page-content props
         or we can make it with v-bind:
@@ -15,8 +15,9 @@
       :page="pages[activePage]"
     ></page-viewer>
 
+    <!-- setting up the listener for the emited event from CreatePage.vue file -->
     <create-page
-      :page-created="pageCreated"
+      @page-created="pageCreated"
     >
     </create-page>
 </template>
@@ -34,6 +35,10 @@ export default {
   },
   created() {
     this.getPages();
+
+    this.$bus.$on('navbarLinkActivated', (index) => {
+      this.activePage = index;
+    });
   },
   data() {
     return {

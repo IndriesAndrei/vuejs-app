@@ -1,21 +1,24 @@
 <template>
-    <!-- we can write instead of:
-    v-bind:href just :href
-
-    and instead of v-on:click  @click
-    -->
-    <a 
-        v-bind:href="page.link.url" 
-        v-bind:title="`This page goes to \${page.link.text} page`"
-        class="nav-link"
-        :class="activeClasses" 
-        aria-current="page"
-    >{{ page.link.text }}</a>
+    <li>
+        <!-- we can write instead of:
+        v-bind:href just :href
+    
+        and instead of v-on:click  @click
+        -->
+        <a 
+            v-bind:href="page.link.url" 
+            v-bind:title="`This page goes to \${page.link.text} page`"
+            class="nav-link"
+            :class="activeClasses" 
+            aria-current="page"
+            @click.prevent="$bus.$emit('navbarLinkActivated', index)"
+        >{{ page.link.text }}</a>
+    </li>
 </template>
 
 <script>
 export default {
-    props: ['page', 'isActive'],
+    props: ['page', 'index', 'isActive'],
     computed: {
         activeClasses() {
             return {

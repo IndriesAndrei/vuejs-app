@@ -68,6 +68,24 @@
 
 <script>
     export default {
+        // name of the emits we emit
+        emits: {
+            pageCreated({pageTitle, content, link}) {
+                if (!pageTitle) {
+                    return false;
+                }
+
+                if (!content) {
+                    return false;
+                }
+
+                if (!link || !link.text || !link.url) {
+                    return false;
+                }
+
+                return true;
+            }
+        },
         props: ['pageCreated'],
         computed: {
             isFormInvalid() {
@@ -90,7 +108,8 @@
                     return;
                 }
 
-                this.pageCreated({
+                // we emit an event ($emit is a public property)
+                this.$emit('pageCreated', {
                     pageTitle: this.pageTitle,
                     content: this.content,
                     link: {
@@ -100,6 +119,16 @@
                     published: this.published
                 });
 
+                // this.pageCreated({
+                //     pageTitle: this.pageTitle,
+                //     content: this.content,
+                //     link: {
+                //         text: this.linkText,
+                //         url: this.linkUrl
+                //     },
+                //     published: this.published
+                // });
+
                 this.pageTitle = '';
                 this.content = '';
                 this.linkText = '';
@@ -107,7 +136,7 @@
                 this.published = true;
             }
         },
-        // adding watchers -> with a method that watches the value and it will execute if the value changes
+        // adding watchers -> with a method that watches the value and it will execute if the value changes and allow us to mutate the state
         watch: {
             pageTitle(newTitle, oldTitle) {
                 if (this.linkText === oldTitle){
