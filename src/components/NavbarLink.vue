@@ -5,14 +5,15 @@
     
         and instead of v-on:click  @click
         -->
-        <a 
+        <router-link
+            :to="`/${index}`"
             v-bind:href="page.link.url" 
             v-bind:title="`This page goes to \${page.link.text} page`"
             class="nav-link"
             :class="activeClasses" 
             aria-current="page"
-            @click.prevent="$bus.$emit('navbarLinkActivated', index)"
-        >{{ page.link.text }}</a>
+        >{{ page.link.text }}</router-link>
+        <!-- @click.prevent="$bus.$emit('navbarLinkActivated', index)" -->
     </li>
 </template>
 

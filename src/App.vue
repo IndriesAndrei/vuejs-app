@@ -5,21 +5,23 @@
         ></navbar>
         <!-- :nav-link-click="(index) => activePage = index" -->
 
+        <router-view></router-view>
+
      <!-- calling our component and passing page-title and page-content props
         or we can make it with v-bind:
       <page-viewer :page-title="pages[activePage].pageTitle" :page-content="pages[activePage].pageTitle"></page-viewer>
     -->
     <!-- <page-viewer page-title="Page Title" page-content="Page Content"></page-viewer> -->
-    <page-viewer 
+    <!-- <page-viewer 
       v-if="pages.length > 0"
       :page="pages[activePage]"
     ></page-viewer>
 
-    <!-- setting up the listener for the emited event from CreatePage.vue file -->
-    <create-page
+     setting up the listener for the emited event from CreatePage.vue file -->
+    <!-- <create-page
       @page-created="pageCreated"
     >
-    </create-page>
+    </create-page> --> 
 </template>
 
 <script>
